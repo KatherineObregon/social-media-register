@@ -1,0 +1,50 @@
+.register_user{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    padding:24px;
+}
+.register_title{
+    font-size: 35px;
+}
+form{
+    text-align: left;
+    padding: 5% 15%;
+}
+.image_input{
+    border:none;
+    margin: 3px auto 10px auto;
+}
+.image_label{
+    margin-left: 5px;
+}
+input {
+    border: 0.5px solid rgba(252, 252, 252, 0.4);
+    background-color: rgba(252, 252, 252, 0.2);
+    width: 250px;
+    border-radius: 3px;
+    font-family: "Source Sans Pro", sans-serif;
+    padding: 10px 15px;
+    margin: 3px auto 10px auto;
+    display: block;
+    text-align: left;
+    font-size: 18px;
+    color:black;
+    font-weight: 300;
+    border-color: gray;
+  }
+  
+  button {
+    appearance: none;
+    outline: 0;
+    background-color: #ec4646;
+    border: 0;
+    padding: 10px 15px;
+    color: white;
+    border-radius: 3px;
+    width: 100px;
+    font-size: 18px;
+    margin-top: 10px;
+    float: right;
+    text-align: center;
+  }

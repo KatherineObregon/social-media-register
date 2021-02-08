@@ -5,15 +5,16 @@ import "./styles.css"
 
 export default function SignInBtn() {
      
-    const [user, setUser] = useContext(UserContext).user;
+    const [user, setUser]= useContext(UserContext).user;
     const signInBtnClick=async ()=>{
         let userBySignIn = await signInWithGoogle();
         if(userBySignIn){
             setUser(userBySignIn);
         }
+        
     }
     return (
-        <div className="signInBtn" onClick={signInBtnClick}>
+        <div className="signInBtn" onClick={signInBtnClick} style={{cursor:"pointer"}}>
             <p>Sign with Google</p>
         </div>
     )
