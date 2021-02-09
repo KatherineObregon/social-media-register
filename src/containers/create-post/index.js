@@ -6,12 +6,15 @@ import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import makeid from '../../helper/functions';
 import {storage, db} from "../../firebase"
 import firebase from "firebase";
+import {SetUsuario} from "../../components/get-user"
 export default function CreatePost() {
 
     const [user, setUser] = useContext(UserContext).user;
     const[caption, setCaption]= useState("");
     const [image, setImage] = useState(null);
     const [progress, setProgress] = useState(0);
+    
+    
     const handleChange= (e)=>{
         if(e.target.files[0]){
             setImage(e.target.files[0]);

@@ -10,6 +10,7 @@ export default function SignInBtn() {
         let userBySignIn = await signInWithGoogle();
         if(userBySignIn){
             setUser(userBySignIn);
+            console.log(user);
         }
         
     }

@@ -5,7 +5,11 @@ import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import {auth, db,storage} from "../../firebase";
 import firebase from "firebase";
 import makeid from "../../helper/functions"
+import { useHistory } from "react-router-dom"
+import {SetUsuario} from "../../components/get-user"
+
 export default function RegisterUser() {
+    const history = useHistory('');
     const [user, setUser] = useContext(UserContext).user;
     const [userInfo, setUserInfo] = useState({
         fName:"",
@@ -17,7 +21,7 @@ export default function RegisterUser() {
     })
     const [image, setImage] = useState(null);
     const [progress, setProgress] = useState(0);
-    const [imageProfileUrl, setImageProfileUrl] = useState("");
+   
     const handleChange =(event)=>{
         const {name , value}=event.target;
         setUserInfo(prevValue =>{
@@ -69,6 +73,7 @@ export default function RegisterUser() {
                               
                         auth.createUserWithEmailAndPassword(userInfo.email, userInfo.clave1)
                         .then((cred)=>{
+                            console.log(cred);
                             return db.collection("users").doc(cred.user.uid).set({
                                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                                nombres: userInfo.fName,
@@ -76,6 +81,10 @@ export default function RegisterUser() {
                                photoUrl: imageUrl,
             
                             })
+                            && setUser(cred.user)&&setTimeout(async ()=>{ 
+                                SetUsuario();
+                              }, 10000);;
+                            
                             //it succesfully created a new user with email and password.
                             
                             
@@ -95,24 +104,30 @@ export default function RegisterUser() {
             })
             setProgress(0);
             setImage(null);
+            
+            history.push('/');
         
         }else{
             
                  e.preventDefault();
                 auth.createUserWithEmailAndPassword(userInfo.email, userInfo.clave1)
                 .then((cred)=>{
+                    
                     return db.collection("users").doc(cred.user.uid).set({
                        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                        nombres: userInfo.fName,
                        apellidos:userInfo.lName ,
                        photoUrl: "https://firebasestorage.googleapis.com/v0/b/reactinstatutorial-6f7c5.appspot.com/o/profileImages%2Fuser.png?alt=media&token=da142ee2-22f5-46ff-934a-2b82752f380d",
     
-                    })
+                    })&& setUser(cred.user)&&setTimeout(async ()=>{ 
+                        SetUsuario();
+                      }, 10000);;
                     //it succesfully created a new user with email and password.
                     
                     
                     
                 }).catch(error=>alert(error.message))
+                
                 setUserInfo({
                     fName:"",
                     lName:"",
@@ -122,7 +137,8 @@ export default function RegisterUser() {
                 })
                 setProgress(0);
                 setImage(null);
-          
+                
+                history.push('/')
            
         }
         
@@ -152,7 +168,7 @@ export default function RegisterUser() {
                         name="lName"
                         onChange={handleChange}
                         placeholder="Apellidos"
-                        value={userInfo.lname}
+                        value={userInfo.lName}
                         />
                         <label htmlFor="email">E-mail</label>
                         <input

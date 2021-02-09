@@ -1,4 +1,5 @@
 import {auth, provider} from "../firebase";
+import firebase from "firebase";
 
 export const signInWithGoogle = async ()=>{
   let user;
@@ -13,6 +14,17 @@ export const signInWithGoogle = async ()=>{
          console.log(error.message);
      });
      return user;
+ }
+ export const loginWithEmail=(email, password)=>{
+
+    firebase.auth().signInWithEmailAndPassword(email, password)
+    .then((user) => {
+      return user;
+    })
+    .catch((error) => {
+    
+      console.log(error.message);
+    });
  }
  export const logout = async ()=>{
      let logout_success;
